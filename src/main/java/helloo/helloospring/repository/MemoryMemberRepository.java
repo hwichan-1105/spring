@@ -1,8 +1,11 @@
 package helloo.helloospring.repository;
 
 import helloo.helloospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
+
+
 
 public class MemoryMemberRepository  implements  MemberRepository{
 
