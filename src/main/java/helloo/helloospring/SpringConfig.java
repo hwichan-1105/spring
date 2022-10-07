@@ -1,8 +1,8 @@
 package helloo.helloospring;
 
-import helloo.helloospring.repository.JdbcMemberRepository;
+import helloo.helloospring.aop.TimeTraceAop;
+import helloo.helloospring.repository.JpaMemberRepository;
 import helloo.helloospring.repository.MemberRepository;
-import helloo.helloospring.repository.MemoryMemberRepository;
 import helloo.helloospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,23 +16,25 @@ public class SpringConfig {
     private DataSource dataSource;
 
 
+    private final MemberRepository memberRepository;
+
     @Autowired
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
-
-
-
 
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
-//        return new MemoryMemberRepository();
-//        return new JdbcMemberRepository(dataSource);
-        return new JdbcMemberRepository(dataSource);
-    }
+
+
+//    @Bean
+//    public MemberRepository memberRepository() {
+////        return new MemoryMemberRepository();
+////        return new JdbcMemberRepository(dataSource);
+////        return new JdbcMemberRepository(dataSource);
+//        return new JpaMemberRepository(em);
+//    }
 }
